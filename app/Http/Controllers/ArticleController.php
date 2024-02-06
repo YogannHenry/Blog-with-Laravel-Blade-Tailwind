@@ -16,8 +16,8 @@ class ArticleController extends Controller
     public function index(): View
     {
         return view('articles.index', [
-            // 'articles' => Article::with('user')->latest()->get(),
-            'articles' => Article::with('user', 'tag', 'category')->latest()->get(),
+            'articles' => Article::with('user')->latest()->get(),
+            // 'articles' => Article::with('user', 'tag', 'category')->latest()->get(),
 
         ]);
     }
