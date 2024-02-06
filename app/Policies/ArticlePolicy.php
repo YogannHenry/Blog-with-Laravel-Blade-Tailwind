@@ -45,7 +45,7 @@ class ArticlePolicy
      */
     public function delete(User $user, Article $article): bool
     {
-        //
+        return $article->user()->is($user, $article);
     }
 
     /**
