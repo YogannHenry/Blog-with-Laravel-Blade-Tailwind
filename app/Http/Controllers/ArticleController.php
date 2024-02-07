@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Tag;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
+use App\Http\Controllers\TagController;
+use Illuminate\Support\Facades\DB;
 
 class ArticleController extends Controller
 {
@@ -15,13 +19,10 @@ class ArticleController extends Controller
      */
     public function index(): View
     {
-        $articles= Article::all();
-        return view('articles.index', [
-            // 'articles' => Article::with('user', 'tags')->latest()->get(),
-            'articles' => $articles,
-            // 'articles' => Article::with('user', 'tag', 'category')->latest()->get(),
-
-        ]);
+        $articles = Article::all();
+        $tags = Tag::all();
+        $categories = Category::all();
+        return view('articles.index', compact('articles', 'tags', 'categories'));
     }
 
     /**
@@ -37,30 +38,23 @@ class ArticleController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $validated = $request->validate([
+        $validatedData = $request->validate([
             'text' => 'required|string|max:255',
             'description' => 'required|string|max:255',
             'imageUrl' => 'required|string',
             'title' => 'required|string|max:255',
         ]);
 
-        $request->user()->articles()->create($validated);
+        // Création de l'article
+        $article = $request->user()->articles()->create($validatedData);
+        // Attacher les tags à l'article
 
-        $article = Article::create([
-            'title' => $request->input('title'),
-            'description' => $request->input('description'),
-            'text' => $request->input('text'),
-            'imageUrl' => $request->input('imageUrl'),
-        ]);
+        // Création ou association des tags
+        if ($request->has('tags')) {
+        $tagIds = $request->input('tags');
 
-        $selectedTags = $request->input('tags', []);
-        $selectedCategories = $request->input('categories', []);
-
-        // Associer les tags sélectionnés à l'article
-        $article->tags()->sync($selectedTags);
-
-        // Associer les catégories sélectionnées à l'article
-        $article->categories()->sync($selectedCategories);
+                DB::table('article_tag')->insert(['article_id' => $article->id, 'tag_id' => $tagIds[0]]);
+        }
 
         return redirect(route('articles.index'));
     }

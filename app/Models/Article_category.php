@@ -22,13 +22,5 @@ class ArticleCategory extends Model
 
     public $timestamps = false;
 
-    public function article()
-    {
-        return $this->belongsTo(Article::class);
-    }
 
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
 }

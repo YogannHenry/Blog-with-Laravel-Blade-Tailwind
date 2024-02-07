@@ -16,14 +16,12 @@ class TagController extends Controller
     public function index(): View
     {
      $tags = Tag::all();
-     dd($tags);
      return view('articles.index', compact('tags'));
     }
 
     public function create()
 {
-    $tags = Tag::all();
-    return view('articles.index', compact('tags'));
+
 }
 
     /**
@@ -61,7 +59,7 @@ class TagController extends Controller
         $this->authorize('update', $tag);
 
         return view('tags.edit', [
-            'chirp' => $tag,
+            'tag' => $tag,
         ]);
     }
 

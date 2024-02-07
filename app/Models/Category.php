@@ -8,11 +8,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Category extends Model
 {
+
+    use HasFactory;
+
     protected $fillable = ['name'];
 
-    public function categories(): BelongsToMany
-    {
-        return $this->belongsToMany(Category::class, 'article_categories');
+    public function categoryArticle()
+    { // association N/N avec table article_tag
+        return $this->belongsToMany(Article::class, 'article_categories', 'category_id', 'article_id');
     }
-
 }

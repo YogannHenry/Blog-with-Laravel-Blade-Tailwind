@@ -40,7 +40,7 @@ Route::resource('tags', TagController::class)
 
     // route::get('/articles', [TagController::class, 'index']);
 Route::resource('categories', CategoryController::class)
-    ->only(['index', 'store'])
+->only(['index', 'store', 'edit', 'update', 'destroy'])
     ->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {
