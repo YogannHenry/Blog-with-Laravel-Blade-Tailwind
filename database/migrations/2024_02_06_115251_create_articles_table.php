@@ -18,8 +18,6 @@ return new class extends Migration
             $table->string('imageUrl');
             $table->string('title');
             $table->string('description');
-            $table->foreignId('category_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('tags_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

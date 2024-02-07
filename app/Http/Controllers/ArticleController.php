@@ -44,7 +44,7 @@ class ArticleController extends Controller
 
         $request->user()->articles()->create($validated);
 
-        return redirect(route('dashboard.index'));
+        return redirect(route('articles.index'));
     }
 
 
