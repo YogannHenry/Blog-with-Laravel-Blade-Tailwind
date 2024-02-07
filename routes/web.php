@@ -35,9 +35,10 @@ Route::resource('articles', ArticleController::class)
     ->middleware(['auth', 'verified']);
 
 Route::resource('tags', TagController::class)
-    ->only(['index', 'store'])
+    ->only(['index', 'store', 'edit', 'update', 'destroy'])
     ->middleware(['auth', 'verified']);
 
+    // route::get('/articles', [TagController::class, 'index']);
 Route::resource('categories', CategoryController::class)
     ->only(['index', 'store'])
     ->middleware(['auth', 'verified']);

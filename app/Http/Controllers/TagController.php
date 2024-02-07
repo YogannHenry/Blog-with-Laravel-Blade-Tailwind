@@ -15,27 +15,34 @@ class TagController extends Controller
      */
     public function index(): View
     {
-        return view('articles.index', [
-            'tags' => Tag::latest()->get(),
-            // 'tags' => Tag::with('articles')->latest()->get(),
-
-        ]);
+     $tags = Tag::all();
+     dd($tags);
+     return view('articles.index', compact('tags'));
     }
+
+    public function create()
+{
+    $tags = Tag::all();
+    return view('articles.index', compact('tags'));
+}
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $request->article()->tags()->create($validated);
+
+        return redirect(route('articles.index'));
     }
 
     /**

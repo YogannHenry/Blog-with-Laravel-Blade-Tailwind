@@ -15,8 +15,10 @@ class ArticleController extends Controller
      */
     public function index(): View
     {
+        $articles= Article::all();
         return view('articles.index', [
-            'articles' => Article::with('user')->latest()->get(),
+            // 'articles' => Article::with('user', 'tags')->latest()->get(),
+            'articles' => $articles,
             // 'articles' => Article::with('user', 'tag', 'category')->latest()->get(),
 
         ]);
@@ -43,6 +45,22 @@ class ArticleController extends Controller
         ]);
 
         $request->user()->articles()->create($validated);
+
+        $article = Article::create([
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'text' => $request->input('text'),
+            'imageUrl' => $request->input('imageUrl'),
+        ]);
+
+        $selectedTags = $request->input('tags', []);
+        $selectedCategories = $request->input('categories', []);
+
+        // Associer les tags sélectionnés à l'article
+        $article->tags()->sync($selectedTags);
+
+        // Associer les catégories sélectionnées à l'article
+        $article->categories()->sync($selectedCategories);
 
         return redirect(route('articles.index'));
     }

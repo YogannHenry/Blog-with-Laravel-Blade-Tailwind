@@ -22,13 +22,12 @@ class ArticleTag extends Model
 
     public $timestamps = false;
 
-    public function article()
-    {
-        return $this->belongsTo(Article::class);
+    public function articleTag() { // association N/N avec table article_tag
+        return $this->belongsToMany(Tag::class, 'article_tags', 'article_id', 'tag_id');
     }
 
-    public function tag()
-    {
-        return $this->belongsTo(Tag::class);
+
+    public function tagArticle() { // association N/N avec table article_tag
+        return $this->belongsToMany(Article::class, 'article_tags', 'tag_id', 'article_id');
     }
 }

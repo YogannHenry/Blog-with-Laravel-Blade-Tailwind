@@ -31,10 +31,16 @@ class Article extends Model
         return $this->hasMany(Chirp::class);
     }
 
-    public function tags(): BelongsToMany
-    {
-        return $this->belongsToMany(Tag::class, 'article_tag');
-    }
+
+
+        public function articleTag() { // association N/N avec table article_tag
+            return $this->belongsToMany(Tag::class, 'article_tag', 'article_id', 'tag_id');
+        }
+
+
+        public function tagArticle() { // association N/N avec table article_tag
+            return $this->belongsToMany(Article::class, 'article_tag', 'tag_id', 'article_id');
+        }
 
     public function categories(): BelongsToMany
     {
