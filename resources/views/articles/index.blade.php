@@ -61,7 +61,10 @@
                     <p class="mb-3 font-bold  text-gray-500 dark:text-gray-400">Ce personnage à dit: "{{ $article->description }}"</p>
                     <p class="mb-3 font-normal text-gray-500 dark:text-gray-900">Auteur: {{ $article->user->name }} </p>
                     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 max-w-72 ">{{ $article->text }}</p>
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 max-w-72 ">{{ dd($article->articleTag)}}</p>
+                    @if ($article->articleTag->isNotEmpty() && $tag = $article->articleTag->first())
+    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 max-w-72 ">{{ $tag->name }}</p>
+@endif
+
 
 
                 </div>
