@@ -56,6 +56,11 @@ class ArticleController extends Controller
                 DB::table('article_tag')->insert(['article_id' => $article->id, 'tag_id' => $tagIds[0]]);
         }
 
+        if ($request->has('categories')) {
+            $categoryIds = $request->input('categories');
+            DB::table('article_categories')->insert(['article_id' => $article->id, 'category_id' => $categoryIds[0]]);
+        }
+
         return redirect(route('articles.index'));
     }
 

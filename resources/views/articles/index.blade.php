@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="w-full pl-64">
+    <div class="w-full pl-64 bg-gradient-to-b from-slate-600 to-black pt-4">
         <x-bladewind.dropmenu>
 
             <x-slot name="trigger">
@@ -25,21 +25,21 @@
                         <!-- *************************************************** -->
                         <!-- *************************************************** -->
 
-<div class="mt-4">
-                        <label for="tags">Tags:</label>
-                        <select name="tags[]" id="tags">
-                            @foreach($tags as $tag)
-                            <option value="{{ $tag->id }}">{{ $tag->name }}</option>
-                            @endforeach
-                        </select>
+                        <div class="mt-4">
+                            <label for="tags">Tags:</label>
+                            <select name="tags[]" id="tags">
+                                @foreach($tags as $tag)
+                                <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                @endforeach
+                            </select>
 
-                        <label for="categories">Categories:</label>
-                        <select name="categories[]" id="categories" >
-                            @foreach($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                            @endforeach
-                        </select>
-</div>
+                            <label for="categories">Categories:</label>
+                            <select name="categories[]" id="categories">
+                                @foreach($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         <!-- *************************************************** -->
                         <!-- *************************************************** -->
                         <!-- *************************************************** -->
@@ -58,7 +58,7 @@
     <div>
     </div>
 
-    <div class="bg-gradient-to-b from-black to-slate-600 h-screen flex justify-center items-center gap-6">
+    <div class="bg-gradient-to-b from-black to-slate-600 grid grid-cols-4 gap-6 px-40 pt-20">
         @foreach($articles as $article)
 
 
@@ -80,18 +80,55 @@
 
                 </div>
                 <div class="flex flex-row justify-between">
-                    <a href="#" class="inline-flex items-center px-3 py-2 text-sm w-fit font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    {{ $tag->name }}
+                    <div class="gap-7">
+                        @php
+                        $tagColorClass = '';
 
-                    </a>
-                    @endif
-                    @if ($article->articleCategory->isNotEmpty() && $category = $article->articleCategory->first())
+                        switch($tag->name) {
+                        case 'Gentils':
+                        $tagColorClass = 'bg-green-500';
+                        break;
+                        case 'Méchants':
+                        $tagColorClass = 'bg-red-500';
+                        break;
+                        case 'Coquins':
+                        $tagColorClass = 'bg-yellow-500';
+                        break;
+                        default:
+                        $tagColorClass = 'bg-blue-700'; // ou toute autre classe par défaut
+                        }
+                        @endphp
 
-                    <a href="#" class="inline-flex items-center px-3 py-2 text-sm w-fit font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-{{ $category->name}}
-                    </a>
-                    @endif
+                        <a href="#" class="inline-flex font-bold items-center px-3 py-2 text-sm w-fit  text-center text-white {{ $tagColorClass }} rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            {{ $tag->name }}
+                        </a>
 
+                        @endif
+                        @if ($article->articleCategory->isNotEmpty() && $category = $article->articleCategory->first())
+
+                        @php
+                        $tagColorClass = '';
+
+                        switch($category->name) {
+                        case 'Nains':
+                        $tagColorClass = 'bg-red-800';
+                        break;
+                        case 'Elfes':
+                        $tagColorClass = 'bg-blue-800';
+                        break;
+                        case 'Orcs':
+                        $tagColorClass = 'bg-green-700';
+                        break;
+                        default:
+                        $tagColorClass = 'bg-blue-700'; // ou toute autre classe par défaut
+                        }
+                        @endphp
+
+                        <a href="#" class="inline-flex items-center px-3 py-2 text-sm w-fit font-medium text-center text-white {{ $tagColorClass }} rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Race:  {{ $category->name}}
+                        </a>
+                        @endif
+                    </div>
                     @if ($article->user->is(auth()->user()))
                     <x-dropdown>
                         <x-slot name="trigger">
