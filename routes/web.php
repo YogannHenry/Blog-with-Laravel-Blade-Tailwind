@@ -31,8 +31,10 @@ Route::resource('chirps', ChirpController::class)
     ->middleware(['auth', 'verified']);
 
 Route::resource('articles', ArticleController::class)
-    ->only(['index', 'store', 'edit', 'update', 'destroy'])
+    ->only(['index', 'store', 'edit', 'update', 'destroy', 'article','show'])
     ->middleware(['auth', 'verified']);
+
+Route::get('articles/{article_id}', [ArticleController::class, 'show'])->name('articles.article');
 
 Route::resource('tags', TagController::class)
     ->only(['index', 'store', 'edit', 'update', 'destroy'])

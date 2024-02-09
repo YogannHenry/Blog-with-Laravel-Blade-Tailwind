@@ -26,7 +26,7 @@ class Article extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function chirps(): HasMany
+    public function chirp(): HasMany
     {
         return $this->hasMany(Chirp::class);
     }

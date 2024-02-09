@@ -3,9 +3,9 @@
         <x-bladewind.dropmenu>
 
             <x-slot name="trigger">
-                <x-bladewind::button type="secondary" size="tiny">
+                <button type="secondary" size="tiny" class="bg-gray-300 px-2 py-1 font-bold border rounded-xl ml-10">
                     Nouvel article
-                </x-bladewind::button>
+                </button>
             </x-slot>
 
             <x-bladewind.dropmenu-item>
@@ -63,12 +63,19 @@
 
 
         <div class="flex flex-col justify-between max-w-sm   w-full bg-white hover:bg-cyan-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 transition duration-300 hover:scale-105">
-            <a href="#">
+
+
+
+        <a href="{{route('articles.show', $article)}}" >
                 <img class="rounded-t-lg h-80 object-cover w-full" src="{{ $article->imageUrl }}" alt="" />
             </a>
+
+
+
+
             <div class="p-5 h-80 flex flex-col justify-between">
                 <div>
-                    <a href="#">
+                    <a href="">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ $article->title }}</h5>
                     </a>
                     <p class="mb-3 font-bold  text-gray-500 dark:text-gray-400">Ce personnage à dit: "{{ $article->description }}"</p>

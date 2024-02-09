@@ -35,24 +35,24 @@ class ChirpController extends Controller
     {
         $validated = $request->validate([
             'message' => 'required|string|max:255',
+            'article_id' => 'required|integer', // Validez l'ID de l'article comme un entier
         ]);
 
-        $request->user()->chirps()->create($validated);
+        $chirp = new Chirp();
+        $chirp->message = $validated['message'];
+        $chirp->article_id = $validated['article_id'];
+        $chirp->user_id = $request->user()->id;
 
-        return redirect(route('chirps.index'));
+        $chirp->save();
+
+        return redirect()->route('articles.article', ['article_id' => $validated['article_id']]);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Chirp $chirp)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Chirp $chirp): View
     {
         $this->authorize('update', $chirp);
@@ -62,9 +62,6 @@ class ChirpController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Chirp $chirp): RedirectResponse
     {
         $this->authorize('update', $chirp);
@@ -78,9 +75,6 @@ class ChirpController extends Controller
         return redirect(route('chirps.index'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Chirp $chirp): RedirectResponse
     {
         $this->authorize('delete', $chirp);

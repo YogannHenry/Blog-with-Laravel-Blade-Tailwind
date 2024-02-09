@@ -25,6 +25,7 @@ class ArticleController extends Controller
         return view('articles.index', compact('articles', 'tags', 'categories'));
     }
 
+
     /**
      * Show the form for creating a new resource.
      */
@@ -70,7 +71,9 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        //
+        $chirps = Article::get($article->id);
+            return view('articles.article', compact('article', 'chirps'));
+
     }
 
     /**
