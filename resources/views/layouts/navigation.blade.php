@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-black border-b border-slate-700 text-white">
+<nav x-data="{ open: false }" class="bg-black border-b border-slate-700 text-white fixed top-0 w-screen">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
         <div class="flex justify-between h-16">
@@ -18,6 +18,14 @@
                     <x-nav-link :href="route('articles.index')" :active="request()->routeIs('articles.index')" class="text-white">
                         {{ __('Articles') }}
                     </x-nav-link>
+                    @if(Auth::user()->role == 'admin')
+                    <x-nav-link :href="route('admin.index')" :active="request()->routeIs('admin.index')" class="text-white">
+                        {{ __('Admin') }}
+                    </x-nav-link>
+                    @endif
+
+
+
                 </div>
             </div>
 
@@ -76,6 +84,7 @@
             <x-responsive-nav-link :href="route('articles.index')" :active="request()->routeIs('articles.index')">
                 {{ __('Articles') }}
             </x-responsive-nav-link>
+
 
         </div>
 

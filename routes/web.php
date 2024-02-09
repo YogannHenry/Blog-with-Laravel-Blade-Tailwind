@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,10 @@ Route::resource('tags', TagController::class)
 
     // route::get('/articles', [TagController::class, 'index']);
 Route::resource('categories', CategoryController::class)
+->only(['index', 'store', 'edit', 'update', 'destroy'])
+    ->middleware(['auth', 'verified']);
+
+    Route::resource('admin', AdminController::class)
 ->only(['index', 'store', 'edit', 'update', 'destroy'])
     ->middleware(['auth', 'verified']);
 

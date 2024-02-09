@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="w-full h-screen  bg-gradient-to-b from-slate-600 to-black pt-4 flex justify-center flex-col ">
+    <div class="w-full h-screen  bg-gradient-to-b from-slate-600 to-black  flex justify-center flex-col pt-20">
         <h2 class="font-semibold font-mono text-4xl text-gray-800 leading-tight text-yellow-400 w-full flex justify-center py-10">
             Le monde D'Aquilon
         </h2>

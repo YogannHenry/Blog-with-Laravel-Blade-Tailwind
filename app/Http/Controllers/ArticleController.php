@@ -44,6 +44,7 @@ class ArticleController extends Controller
             'description' => 'required|string|max:255',
             'imageUrl' => 'required|string',
             'title' => 'required|string|max:255',
+            'bigImage' => 'required|string',
         ]);
 
         // Création de l'article
@@ -100,6 +101,7 @@ class ArticleController extends Controller
             'description' => 'required|string|max:255',
             'imageUrl' => 'required|string',
             'title' => 'required|string|max:255',
+            'bigImage' => 'required|string',
         ]);
 
         $article->update($validated);

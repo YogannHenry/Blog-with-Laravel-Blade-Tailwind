@@ -1,4 +1,6 @@
 <x-app-layout>
+<div class="bg-gradient-to-b from-slate-600 to-black h-screen w-screen pt-20">
+
     <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
         <form method="POST" action="{{ route('chirps.update', $chirp) }}">
             @csrf
@@ -14,4 +16,5 @@
             </div>
         </form>
     </div>
+</div>
 </x-app-layout>

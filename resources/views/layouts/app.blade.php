@@ -23,13 +23,14 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased bg-gradient-to-b from-black to-slate-600 min-h-screen" style="background-image:url(https://cdn.openart.ai/stable_diffusion/c868623533bdb758f8212ca4a3bbb0f8b7661529_2000x2000.webp)">
+
         <div>
             @include('layouts.navigation')
 
             <!-- Page Heading -->
             @if (isset($header))
-                <header class="bg-white shadow">
+                <header class="bg-black shadow">
                     <div class="max-w-7xl mx-auto  px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
@@ -37,7 +38,7 @@
             @endif
 
             <!-- Page Content -->
-            <main>
+            <main class="">
                 {{ $slot }}
             </main>
         </div>

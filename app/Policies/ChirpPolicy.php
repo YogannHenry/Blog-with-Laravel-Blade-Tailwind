@@ -37,9 +37,9 @@ class ChirpPolicy
      */
     public function update(User $user, Chirp $chirp): bool
     {
-        //
-        return $chirp->user()->is($user);
+        return $user->role === 'admin' || $chirp->user->is($user);
     }
+
 
     /**
      * Determine whether the user can delete the model.

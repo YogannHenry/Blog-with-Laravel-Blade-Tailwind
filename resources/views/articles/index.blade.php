@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="w-full pl-64 bg-gradient-to-b from-slate-600 to-black pt-4">
+    <div class="w-full pl-64 bg-gradient-to-b from-slate-600 to-black pt-24">
         <x-bladewind.dropmenu>
 
             <x-slot name="trigger">
@@ -20,6 +20,8 @@
                         <x-input-error :messages="$errors->get('text')" class="mt-2" />
                         <input name="imageUrl" placeholder="{{ __('Image URL') }}" class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">{{ old('imageUrl') }}</input>
                         <x-input-error :messages="$errors->get('imageUrl')" class="mt-2" />
+                        <input name="bigImage" placeholder="{{ __('Big Image') }}" class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">{{ old('imageUrl') }}</input>
+                        <x-input-error :messages="$errors->get('bigImage')" class="mt-2" />
 
                         <!-- *************************************************** -->
                         <!-- *************************************************** -->

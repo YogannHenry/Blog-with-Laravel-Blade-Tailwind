@@ -42,6 +42,8 @@ class ChirpController extends Controller
         $chirp->message = $validated['message'];
         $chirp->article_id = $validated['article_id'];
         $chirp->user_id = $request->user()->id;
+        $chirp->validatedByAdmin = false;
+
 
         $chirp->save();
 
@@ -68,19 +70,23 @@ class ChirpController extends Controller
 
         $validated = $request->validate([
             'message' => 'required|string|max:255',
+            'article_id' => 'required|integer'
         ]);
 
         $chirp->update($validated);
 
-        return redirect(route('chirps.index'));
+        return redirect()->route('articles.article', ['article_id' => $validated['article_id']]);
     }
 
-    public function destroy(Chirp $chirp): RedirectResponse
+    public function destroy(Request $request, Chirp $chirp): RedirectResponse
     {
         $this->authorize('delete', $chirp);
+        $validated = $request->validate([
+            'article_id' => 'required|integer'
+        ]);
 
         $chirp->delete();
 
-        return redirect(route('chirps.index'));
+        return redirect()->route('articles.article', ['article_id' => $validated['article_id']]);
     }
 }
